@@ -67,3 +67,5 @@ where email = 'YOUR_OPERATOR_EMAIL';
 `tests/`: 동의·중복·실패 재전송 테스트, 브라우저 사용자 흐름 검증
 
 구현 기준: [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security), [GitHub Pages Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+보안 검사에서 RLS 정책 없음은 원본 테이블을 전면 비공개로 둔 의도된 설정입니다. [SECURITY DEFINER 공개 실행 알림](https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable)은 허용된 이벤트만 받는 수집 RPC에 해당하며, [로그인 사용자 실행 알림](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable)은 수집 RPC 및 내부 운영자 권한을 검사하는 집계 RPC에 해당합니다. 원본 테이블 직접 접근과 익명 대시보드 실행은 차단됨을 DB 권한 검사로 확인했습니다.
